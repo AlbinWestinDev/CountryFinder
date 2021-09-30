@@ -1,0 +1,45 @@
+﻿@page "/"
+@inherits IndexBase
+
+<h1>Hej Logga in då !</h1>
+
+<EditForm Model="@Model" OnValidSubmit="@GetCountriesByNameAsync">
+
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Namn</label>
+        <InputText id="name" class="form-control" @bind-Value="Model.CountryName" />
+        
+    </div>
+    <button type="submit" class="btn btn-primary">Sök</button>
+</EditForm>
+
+
+@if (Countries != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th scope="col">Namn</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Countries)
+            {
+                <tr>
+
+                    <td>@item.Namn</td>
+
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+}
+
+

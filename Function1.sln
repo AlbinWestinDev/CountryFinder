@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetCountry", "Function1\GetCountry.csproj", "{3E6FA74C-C29D-415B-BE3D-9A84E924BB4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountryClient", "CountryClient\CountryClient.csproj", "{AAB8D2CB-8E1E-477C-89DC-CD83883A66C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{0FDF919B-48DD-4E2A-9866-D3874FD501E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E6FA74C-C29D-415B-BE3D-9A84E924BB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E6FA74C-C29D-415B-BE3D-9A84E924BB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E6FA74C-C29D-415B-BE3D-9A84E924BB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E6FA74C-C29D-415B-BE3D-9A84E924BB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB8D2CB-8E1E-477C-89DC-CD83883A66C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB8D2CB-8E1E-477C-89DC-CD83883A66C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB8D2CB-8E1E-477C-89DC-CD83883A66C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB8D2CB-8E1E-477C-89DC-CD83883A66C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FDF919B-48DD-4E2A-9866-D3874FD501E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FDF919B-48DD-4E2A-9866-D3874FD501E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FDF919B-48DD-4E2A-9866-D3874FD501E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FDF919B-48DD-4E2A-9866-D3874FD501E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D6FE110-D306-4799-BD77-962C0CBB7C20}
+	EndGlobalSection
+EndGlobal
