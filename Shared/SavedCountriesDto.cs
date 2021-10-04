@@ -10,6 +10,11 @@ namespace Shared
 
     public class SaveEntity : TableEntity
     {
+
+        public SaveEntity()
+        {
+
+        }
         public SaveEntity(string skey, string srow)
         {
             this.PartitionKey = skey;

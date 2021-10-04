@@ -17,8 +17,59 @@ using Shared;
 
 namespace Function1
 {
+    public static class GetFromTableStorage
+    {
 
-   public static class SaveCountry
+        [FunctionName("GetFromTableStorage")]
+
+        public static async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            ILogger log)
+        {
+
+            log.LogInformation("Saving");
+
+
+            //dynamic body = await req.Content.ReadAsStringAsync();
+            //var c = JsonConvert.DeserializeObject<SavedCountriesDto>(body as string);
+
+            string name = req.Query["name"];
+
+
+
+
+            var con = "DefaultEndpointsProtocol=https;AccountName=abbestorageazure;AccountKey=S+umdRcAu5ayCb+K/9KlaRrxxKs9klSwMM8NmnwT8DKNDxtdQEWWFzKjOtUJ7ND3mK+A6EkU1ob+FpnP3/Qz6g==;EndpointSuffix=core.windows.net";
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(con);
+
+
+
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+            CloudTable table = tableClient.GetTableReference("savedCountries");
+
+
+            TableQuery<SaveEntity> query = new TableQuery<SaveEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "save"));
+
+
+            List<SaveEntity> resultList = new List<SaveEntity>();
+
+            foreach (SaveEntity item in table.ExecuteQuerySegmentedAsync(query, null).Result)
+            {
+
+                SaveEntity newItem = new SaveEntity();
+                newItem.CountryName = item.CountryName;
+
+                resultList.Add(newItem);
+            }
+
+           
+
+
+            return new OkObjectResult(resultList.Take(10));
+        }
+    }
+    public static class SaveCountry
     {
 
         [FunctionName("SaveCountry")]
