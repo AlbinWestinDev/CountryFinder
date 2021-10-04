@@ -5,16 +5,7 @@ using System.Text;
 
 namespace Shared
 {
-    public class SavedCountriesDto
-    {
-        public SavedCountriesDto()
-        {
-            Created = DateTime.Now;
-        }
-        public string Name { get; set; }
-        public DateTime Created { get; set; }
 
-    }
 
 
     public class SaveEntity : TableEntity
@@ -23,9 +14,10 @@ namespace Shared
         {
             this.PartitionKey = skey;
             this.RowKey = srow;
+            Created = DateTime.Now;
         }
 
-    
+        public DateTime Created { get; set; }
 
         public string CountryName { get; set; }
      

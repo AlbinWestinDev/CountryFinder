@@ -18,7 +18,54 @@ using Shared;
 namespace Function1
 {
 
-   
+   public static class SaveCountry
+    {
+
+        [FunctionName("SaveCountry")]
+
+            public static async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            ILogger log)
+            {
+
+            log.LogInformation("Saving");
+
+
+            //dynamic body = await req.Content.ReadAsStringAsync();
+            //var c = JsonConvert.DeserializeObject<SavedCountriesDto>(body as string);
+
+            string name = req.Query["name"];
+
+
+
+
+            // Define the row,
+            string sRow = name + DateTime.Now;
+
+            SaveEntity saveEntity = new SaveEntity("save", sRow);
+
+            saveEntity.CountryName = name;
+
+            var con = "DefaultEndpointsProtocol=https;AccountName=abbestorageazure;AccountKey=S+umdRcAu5ayCb+K/9KlaRrxxKs9klSwMM8NmnwT8DKNDxtdQEWWFzKjOtUJ7ND3mK+A6EkU1ob+FpnP3/Qz6g==;EndpointSuffix=core.windows.net";
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(con);
+
+           
+
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+            CloudTable table = tableClient.GetTableReference("savedCountries");
+
+            table.CreateIfNotExistsAsync();
+
+            TableOperation insertOperation = TableOperation.Insert(saveEntity);
+
+            table.ExecuteAsync(insertOperation);
+
+
+            return new OkObjectResult("");
+        }
+    }
     public static class GetCountry
     {
         [FunctionName("GetCountry")]
@@ -52,42 +99,7 @@ namespace Function1
 
 
 
-        [FunctionName("SaveCountry")]
-        public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, ILogger log)
-        {
-
-            log.LogInformation("Saving");
-
-
-            dynamic body = await req.Content.ReadAsStringAsync();
-            var c = JsonConvert.DeserializeObject<SavedCountriesDto>(body as string);
-
-
-            // Define the row,
-            string sRow = c.Name + c.Created;
-
-            SaveEntity saveEntity = new SaveEntity("save",sRow);
-
-            saveEntity.CountryName = c.Name;
-
-            
-
-
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse("https://azurefunctionswebapp.azurewebsites.net");
-
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-
-            CloudTable table = tableClient.GetTableReference("savedCountries");
-
-            table.CreateIfNotExistsAsync();
-
-            TableOperation insertOperation = TableOperation.Insert(saveEntity);
-
-            table.ExecuteAsync(insertOperation);
-
-          
-            return req.CreateResponse(HttpStatusCode.OK, "Ok");
-        }
+      
 
 
     }
