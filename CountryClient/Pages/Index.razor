@@ -2,7 +2,11 @@
 @inherits IndexBase
 
 <h1>Hej Logga in då !</h1>
+<AuthorizeView>
+    <NotAuthorized>
 
+    </NotAuthorized>
+</AuthorizeView>
 <EditForm Model="@Model" OnValidSubmit="@GetCountriesByNameAsync">
 
     <ValidationSummary />
@@ -13,6 +17,7 @@
         
     </div>
     <button type="submit" class="btn btn-primary">Sök</button>
+    <br />
 </EditForm>
 
 
@@ -41,5 +46,20 @@
         </tbody>
     </table>
 }
+
+
+
+<div class="container">
+    <br />
+    <h2>Senaste 10 sökningar </h2>
+    @foreach (var item in LastSearches)
+    {
+        <span class="label label-default">@item.CountryName</span>
+        <br />
+
+    }
+
+</div>
+
 
 

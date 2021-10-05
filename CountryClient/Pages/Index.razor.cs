@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace CountryClient.Pages
         public string CountryName { get; set; }
     }
 
-    public class IndexBase:ComponentBase
+    public class IndexBase : ComponentBase
     {
         [Inject]
         public HttpClient client { get; set; }
@@ -24,11 +25,16 @@ namespace CountryClient.Pages
 
         public EditModel Model { get; set; } = new EditModel();
 
+        public string UrlLastSearches { get; set; } = "http://localhost:7071/api/GetFromTableStorage";
+
+        public List<SaveEntity> LastSearches { get; set; } = new List<SaveEntity>();
+        public string UrlSaveLastSearches { get; set; } = "http://localhost:7071/api/SaveCountry";
+
         protected override async Task<Task> OnInitializedAsync()
         {
 
-           
 
+           await GetLastSearches();
             return base.OnInitializedAsync();
         }
 
@@ -36,9 +42,19 @@ namespace CountryClient.Pages
         {
             var result = await client.GetFromJsonAsync<List<CountriesDto>>(UrlGetCountries+"?name="+ Model.CountryName);
 
+            await client.GetAsync(UrlSaveLastSearches + "?name=" + Model.CountryName);
+            await GetLastSearches();
          
             Countries = result;
             StateHasChanged();
+        }
+        public async Task GetLastSearches()
+        {
+            LastSearches = await client.GetFromJsonAsync<List<SaveEntity>>(UrlLastSearches);
+
+
+            StateHasChanged();
+
         }
     }   
 }
