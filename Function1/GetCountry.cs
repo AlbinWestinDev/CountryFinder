@@ -27,14 +27,7 @@ namespace Function1
             ILogger log)
         {
 
-            log.LogInformation("Saving");
-
-
-            //dynamic body = await req.Content.ReadAsStringAsync();
-            //var c = JsonConvert.DeserializeObject<SavedCountriesDto>(body as string);
-
-            string name = req.Query["name"];
-
+            log.LogInformation("get");
 
 
 
@@ -80,10 +73,6 @@ namespace Function1
             {
 
             log.LogInformation("Saving");
-
-
-            //dynamic body = await req.Content.ReadAsStringAsync();
-            //var c = JsonConvert.DeserializeObject<SavedCountriesDto>(body as string);
 
             string name = req.Query["name"];
 
