@@ -106,7 +106,7 @@ namespace Function1
             return new OkObjectResult("");
         }
     }
-    public static class GetCountry
+    public static class Country
     {
         [FunctionName("GetCountry")]
         public static async Task<IActionResult> Run(
